@@ -21,11 +21,11 @@ lastSent = -1
 full = False
 currentlyCharging = "Start"
 pausedByAPI = False
-
-
+startPercentage = ""
+stopPercentage = ""
 
 def configRead():
-    global wallboxEmail, wallboxPassword, sonnenBatterieIP, dataBaseIPwithPort, wallboxID
+    global wallboxEmail, wallboxPassword, sonnenBatterieIP, dataBaseIPwithPort, wallboxID, startPercentage, stopPercentage
     filename = "settings.config"
     contents = open(filename).read()
     config = eval(contents)
@@ -34,6 +34,8 @@ def configRead():
     sonnenBatterieIP = config['sonnenBatterieIP']
     dataBaseIPwithPort = config['dataBaseIPwithPort']
     wallboxID = config['wallboxID']
+    startPercentage = config['startPercentage']
+    stopPercentage = config['stopPercentage']
 
 def getDataCharge():
     global chargingAmp, automaticCharging, dataCharge
@@ -76,7 +78,7 @@ def checkAndCommand():
     # Wallbox
 
     try:
-        if percentage >= 80:
+        if percentage >= startPercentage:
             if automaticCharging == "1":
                 print("Resume Charging")
                 wallbox.resumeChargingSession(wallboxID)
@@ -85,7 +87,7 @@ def checkAndCommand():
                 print("Stop Charging")
                 wallbox.resumeChargingSession(wallboxID)
                 pausedByAPI = True
-        elif percentage <= 75:
+        elif percentage <= stopPercentage:
             print("Stop Charging")
             wallbox.pauseChargingSession(wallboxID)
             pausedByAPI = False

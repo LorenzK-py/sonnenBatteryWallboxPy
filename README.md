@@ -41,5 +41,7 @@ screen -S automaticCharging python3 main.py
 screen -r automaticCharging
 #CTRL + C
 ```
+Your car will now start and stop charging according to the values set in settings.config. (When plugging in your vehicle you need to unlock it in the Wallbox app first)
+
 ## Controlling the API
 You can control the API using the apiControl.py file (You need to edit the IP in the file first + you may also want to convert the file to .exe to use it on any pc)

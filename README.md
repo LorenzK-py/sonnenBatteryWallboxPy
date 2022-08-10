@@ -27,3 +27,15 @@ screen -S db ./start.sh
 screen -r db
 #CTRL + C
 ```
+Now you can start the main Python program on a server:
+```bash
+python3 main.py
+```
+or alternatively with screen:
+```bash
+screen -S automaticCharging python3 main.py
+
+#Stop the database 
+screen -r automaticCharging
+#CTRL + C
+```

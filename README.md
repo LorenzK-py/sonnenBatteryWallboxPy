@@ -42,4 +42,4 @@ screen -r automaticCharging
 #CTRL + C
 ```
 ## Controlling the API
-You can control the API using the apiControl.py file (You may also want to convert the file to .exe to use it on any pc)
+You can control the API using the apiControl.py file (You need to edit the IP in the file first + you may also want to convert the file to .exe to use it on any pc)

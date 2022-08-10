@@ -31,7 +31,7 @@ Now you can start the main Python program on a server:
 ```bash
 python3 main.py
 ```
-or alternatively with screen:
+or alternatively using Screen:
 ```bash
 screen -S automaticCharging python3 main.py
 

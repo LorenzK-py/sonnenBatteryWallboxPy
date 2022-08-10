@@ -43,18 +43,3 @@ screen -r automaticCharging
 ```
 ## Controlling the API
 You can control the API using the apiControl.py file (You may also want to convert the file to .exe to use it on any pc)
-
-```bash
-_______________________   _________            _____             ______
-___    |__  __ \___  _/   __  ____/______________  /________________  /
-__  /| |_  /_/ /__  /     _  /    _  __ \_  __ \  __/_  ___/  __ \_  /
-_  ___ |  ____/__/ /      / /___  / /_/ /  / / / /_ _  /   / /_/ /  /
-/_/  |_/_/     /___/      \____/  \____//_/ /_/\__/ /_/    \____//_/
-
-
-1) Enable Automatic Charging
-2) Disable Automatic Charging
-0) Exit
-
-Option:
-```

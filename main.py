@@ -21,11 +21,11 @@ lastSent = -1
 full = False
 currentlyCharging = "Start"
 pausedByAPI = False
-startPercentage = ""
-stopPercentage = ""
+
+
 
 def configRead():
-    global wallboxEmail, wallboxPassword, sonnenBatterieIP, dataBaseIPwithPort, wallboxID, startPercentage, stopPercentage
+    global wallboxEmail, wallboxPassword, sonnenBatterieIP, dataBaseIPwithPort, wallboxID
     filename = "settings.config"
     contents = open(filename).read()
     config = eval(contents)
@@ -34,8 +34,6 @@ def configRead():
     sonnenBatterieIP = config['sonnenBatterieIP']
     dataBaseIPwithPort = config['dataBaseIPwithPort']
     wallboxID = config['wallboxID']
-    startPercentage = config['startPercentage']
-    stopPercentage = config['stopPercentage']
 
 def getDataCharge():
     global chargingAmp, automaticCharging, dataCharge
@@ -65,20 +63,16 @@ def getDataBattery():
 @tl.job(interval=timedelta(seconds=300))
 def checkAndCommand():
     global percentage, automaticCharging, chargingAmp, wallbox, lastSent, full, currentlyCharging
-
-    getDataCharge()
-    getDataBattery()
-    getDataAmp()
-
-    print("-----------------------")
-    print("Battery percentage: " + str(percentage))
-    print("Automatic Charging: " + str(automaticCharging))
-    print("Charging Amp: " + str(chargingAmp))
-
-    # Wallbox
-
     try:
-        if percentage >= startPercentage:
+        getDataCharge()
+        getDataBattery()
+        getDataAmp()
+
+        print("-----------------------")
+        print("Battery percentage: " + str(percentage))
+        print("Automatic Charging: " + str(automaticCharging))
+        print("Charging Amp: " + str(chargingAmp))
+        if percentage >= 80:
             if automaticCharging == "1":
                 print("Resume Charging")
                 wallbox.resumeChargingSession(wallboxID)
@@ -87,7 +81,7 @@ def checkAndCommand():
                 print("Stop Charging")
                 wallbox.resumeChargingSession(wallboxID)
                 pausedByAPI = True
-        elif percentage <= stopPercentage:
+        elif percentage <= 75:
             print("Stop Charging")
             wallbox.pauseChargingSession(wallboxID)
             pausedByAPI = False

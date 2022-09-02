@@ -81,7 +81,7 @@ def checkAndCommand():
                 print("Stop Charging")
                 wallbox.resumeChargingSession(wallboxID)
                 pausedByAPI = True
-        elif percentage <= 75:
+        elif percentage <= 75 and automaticCharging == "1":
             print("Stop Charging")
             wallbox.pauseChargingSession(wallboxID)
             pausedByAPI = False
